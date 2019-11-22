@@ -1,11 +1,12 @@
 # %%
 
 # -*- coding: utf-8 -*-
-import dash
-import pandas as pd
-import plotly.graph_objs as go
-import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
+import dash_core_components as dcc
+import plotly.graph_objs as go
+import pandas as pd
+import dash
 
 # %%
 ma_token = (
@@ -38,18 +39,29 @@ df_wt.close()
 
 # %%
 
+UPPER_LIMIT_DATE = "2016"
 stations = df_aq.get("master")
+emissions = {}
+
+for st in stations["id"]:
+    aux = df_aq[str(st)]
+    aux = aux.sort_values("date")
+    aux.index = pd.to_datetime(aux.index)
+    emissions[st] = aux[aux.index < UPPER_LIMIT_DATE]
+
 df_aq.close()
 
 # %%
 
-external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
+navbar = html.Div(
+    [html.H1("Air Quality and Weather in Madrid - 2001 to 2016")]
+)
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+# %%
 
 c_lat = float(stations[stations["name"] == "Parque del Retiro"]["lat"])
 c_lon = float(stations[stations["name"] == "Parque del Retiro"]["lon"])
-map = dcc.Graph(
+stations_map = dcc.Graph(
     id="stations-map",
     figure={
         "data": [
@@ -65,6 +77,7 @@ map = dcc.Graph(
             autosize=True,
             hovermode="closest",
             showlegend=False,
+            height=700,
             mapbox={
                 "accesstoken": ma_token,
                 "style": ma_style,
@@ -76,7 +89,8 @@ map = dcc.Graph(
     },
 )
 
-app.layout = html.Div([map])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app.layout = html.Div([navbar, stations_map])
 
 if __name__ == "__main__":
     app.run_server(debug=True)
