@@ -53,7 +53,7 @@ df_aq.close()
 
 # %%
 
-navbar = html.Div(
+navbar = html.Center(
     [html.H1("Air Quality and Weather in Madrid - 2001 to 2016")]
 )
 
