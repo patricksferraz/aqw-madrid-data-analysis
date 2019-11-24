@@ -73,7 +73,6 @@ stations_map = dcc.Graph(
             }
         ],
         "layout": go.Layout(
-            title="Teste",
             autosize=True,
             hovermode="closest",
             showlegend=False,
@@ -89,8 +88,16 @@ stations_map = dcc.Graph(
     },
 )
 
+# %%
+
+body = html.Div(
+    dbc.Row(
+        [dbc.Col(stations_map, md=7), dbc.Col(html.Div(), md=5)], no_gutters=True
+    )
+)
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-app.layout = html.Div([navbar, stations_map])
+app.layout = html.Div([navbar, body])
 
 if __name__ == "__main__":
     app.run_server(debug=True)
