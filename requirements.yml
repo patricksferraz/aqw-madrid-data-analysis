@@ -83,4 +83,7 @@ dependencies:
   - zeromq=4.3.2=he1b5a44_2
   - zipp=0.6.0=py_0
   - zlib=1.2.11=h7b6447c_3
+  - pip:
+    - numexpr==2.7.0
+    - tables==3.6.1
 prefix: /opt/anaconda/envs/analysis
