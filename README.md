@@ -28,6 +28,7 @@ Check out the demo video in the `docs` folder: [video.mp4](docs/video.mp4)
   - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
+    - [Environment Setup](#environment-setup)
     - [Installation](#installation)
       - [With pip](#with-pip)
       - [With Anaconda](#with-anaconda)
@@ -48,6 +49,19 @@ Check out the demo video in the `docs` folder: [video.mp4](docs/video.mp4)
 
 - Python 3.6 or higher
 - pip or Anaconda
+- Mapbox account and access token
+
+### Environment Setup
+
+1. Create a `.env` file in the project root:
+```bash
+touch .env
+```
+
+2. Add your Mapbox token to the `.env` file:
+```bash
+MAPBOX_TOKEN=your_mapbox_token_here
+```
 
 ### Installation
 
@@ -102,6 +116,7 @@ jupyter-lab
 - `dataset/`: Contains the air quality and weather data files.
 - `docs/`: Documentation and demo video.
 - `requirements.txt` and `requirements.yml`: Dependency management files.
+- `.env`: Environment variables file (not tracked in git).
 
 ## Data Sources
 
